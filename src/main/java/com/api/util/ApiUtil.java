@@ -22,6 +22,7 @@ public class ApiUtil {
 			// 응답 데이터 받아오기
 			int responseCode = conn.getResponseCode();
 			BufferedReader br;
+			System.out.println("url responseCode : " + responseCode);
 			if (responseCode == 200) { // 정상 호출
 				br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			} else {
@@ -29,6 +30,7 @@ public class ApiUtil {
 			}
 
 			String line;
+			System.out.println("data 읽어오는 중");
 			while ((line = br.readLine()) != null) {
 				response.append(line);
 			}
@@ -36,6 +38,7 @@ public class ApiUtil {
 			br.close();
 			conn.disconnect();
 
+			
 			//TODO 나중에 지울거임
 			// 전송받은 데이터 파일로 저장
 			
