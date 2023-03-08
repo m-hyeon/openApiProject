@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.api.service.dao.ApiMapper">
+		
+	<resultMap id="insertAir" type="com.api.vo.AirVO">
+		<result property="MSRDT" column="MSRDT" />
+		<result property="MSRSTE_NM" column="MSRSTE_NM" />
+		<result property="NO2" column="NO2" />
+		<result property="O3" column="O3" />
+		<result property="CO" column="CO" />
+		<result property="SO2" column="SO2" />
+		<result property="PM10" column="PM10" />
+		<result property="PM25" column="PM25" />
+	</resultMap>
+	
+	<resultMap id="insertAcdnt" type="com.api.vo.AcdntVO">
+		<result property="type" column="type" />
+		<result property="eventType" column="eventType" />
+		<result property="eventDetailType" column="eventDetailType" />
+		<result property="startDate" column="startDate" />
+		<result property="coordX" column="coordX" />
+		<result property="coordY" column="coordY" />
+		<result property="linkId" column="linkId" />
+		<result property="roadName" column="roadName" />
+		<result property="roadNo" column="roadNo" />
+		<result property="roadDrcType" column="roadDrcType" />
+		<result property="lanesBlockType" column="lanesBlockType" />
+		<result property="lanesBlocked" column="lanesBlocked" />
+		<result property="message" column="message" />
+		<result property="endDate" column="endDate" />
+	</resultMap>
+
+	
+	<insert id="insertAir">
+		<![CDATA[
+		replace into incinfo.avg_air_pol (MSRDT, MSRSTE_NM, NO2, O3, CO, SO2, PM10, PM25) 
+		 values (#{MSRDT}, #{MSRSTE_NM}, #{NO2}, #{O3}, #{CO}, #{SO2}, #{PM10}, #{PM25})	
+		]]>
+	</insert>
+	
+	
+	<insert id="insertAcdnt">
+		<![CDATA[
+		replace into incinfo.acdnt_info
+		(type, eventType, eventDetailType, startDate, coordX, coordY, linkId, roadName, roadNo, roadDrcType, lanesBlockType, lanesBlocked, message, endDate) 
+		 values 
+		(#{type}, #{eventType}, #{eventDetailType}, #{startDate}, #{coordX}, #{coordY}, #{linkId}, 
+		#{roadName}, #{roadNo}, #{roadDrcType}, #{lanesBlockType}, #{lanesBlocked}, #{message}, #{endDate})	
+		]]>
+	</insert>
+	
+	
+	
+	
+</mapper>
