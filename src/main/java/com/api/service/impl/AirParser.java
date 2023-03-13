@@ -16,12 +16,10 @@ import com.api.vo.AirVO;
 public class AirParser implements ParserIntf {
 
 	@Autowired
-	AirVO airVO;
-
-	@Autowired
 	ApiService apiService;
 
 	static public String XmlTag1 = "row";
+	private AirVO airVO = new AirVO();
 
 	@Override
 	public String[] element() {

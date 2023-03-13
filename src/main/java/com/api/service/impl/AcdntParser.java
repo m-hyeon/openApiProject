@@ -12,13 +12,12 @@ import com.api.vo.AcdntVO;
 
 @Component
 public class AcdntParser implements ParserIntf {
-	@Autowired
-	AcdntVO acdntVO;
 
 	@Autowired
 	ApiService apiService;
 
 	static public String jsonTag1 = "items";
+	private AcdntVO acdntVO = new AcdntVO();
 
 	@Override
 	public String[] element() {
@@ -31,7 +30,7 @@ public class AcdntParser implements ParserIntf {
 	}
 
 	@Override
-	public void serviceExcute(String[] value) {
+	public void serviceExcute(String[] value) {		
 		acdntVO.setType(value[0]);
 		acdntVO.setEventType(value[1]);
 		acdntVO.setEventDetailType(value[2]);

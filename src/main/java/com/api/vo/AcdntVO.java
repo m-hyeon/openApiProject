@@ -1,8 +1,5 @@
 package com.api.vo;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class AcdntVO {
 	private String type;
 	private String eventType;
