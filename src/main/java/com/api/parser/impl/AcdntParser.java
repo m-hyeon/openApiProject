@@ -1,4 +1,4 @@
-package com.api.service.impl;
+package com.api.parser.impl;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -6,8 +6,8 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.api.parser.ParserIntf;
 import com.api.service.ApiService;
-import com.api.service.ParserIntf;
 import com.api.vo.AcdntVO;
 
 @Component

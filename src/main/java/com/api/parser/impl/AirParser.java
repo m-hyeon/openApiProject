@@ -1,4 +1,4 @@
-package com.api.service.impl;
+package com.api.parser.impl;
 
 import java.io.StringReader;
 
@@ -13,8 +13,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import com.api.parser.ParserIntf;
 import com.api.service.ApiService;
-import com.api.service.ParserIntf;
 import com.api.vo.AirVO;
 
 @Component

@@ -1,4 +1,4 @@
-package com.api.util;
+package com.api.parser.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

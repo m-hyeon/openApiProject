@@ -6,9 +6,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import com.api.service.impl.AcdntParser;
-import com.api.service.impl.AirParser;
-import com.api.util.ApiUtil;
+import com.api.parser.impl.AcdntParser;
+import com.api.parser.impl.AirParser;
+import com.api.parser.util.ApiUtil;
 
 @Component
 @PropertySource(value = "classpath:application.properties", encoding = "UTF-8")
