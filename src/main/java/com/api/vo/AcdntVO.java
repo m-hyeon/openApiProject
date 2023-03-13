@@ -131,4 +131,13 @@ public class AcdntVO {
 		this.endDate = endDate;
 	}
 
+	@Override
+	public String toString() {
+		return "AcdntVO [type=" + type + ", eventType=" + eventType + ", eventDetailType=" + eventDetailType
+				+ ", startDate=" + startDate + ", coordX=" + coordX + ", coordY=" + coordY + ", linkId=" + linkId
+				+ ", roadName=" + roadName + ", roadNo=" + roadNo + ", roadDrcType=" + roadDrcType + ", lanesBlockType="
+				+ lanesBlockType + ", lanesBlocked=" + lanesBlocked + ", message=" + message + ", endDate=" + endDate
+				+ "]";
+	}
+
 }

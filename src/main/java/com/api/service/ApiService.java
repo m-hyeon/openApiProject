@@ -7,5 +7,5 @@ public interface ApiService {
 
 	public void insertAcdnt(AcdntVO acdnt);
 	public void insertAir(AirVO air);
-	
+
 }

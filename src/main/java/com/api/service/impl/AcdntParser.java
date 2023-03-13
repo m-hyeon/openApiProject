@@ -12,7 +12,6 @@ import com.api.vo.AcdntVO;
 
 @Component
 public class AcdntParser implements ParserIntf {
-
 	@Autowired
 	AcdntVO acdntVO;
 
@@ -51,6 +50,8 @@ public class AcdntParser implements ParserIntf {
 		acdntVO.setMessage(value[12]);
 		acdntVO.setEndDate(value[13]);
 
+		System.out.println("acdntVo: " + acdntVO.getLinkId());
+		
 		apiService.insertAcdnt(acdntVO);
 	}
 
