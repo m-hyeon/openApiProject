@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 public class AirVO {
 	private String MSRDT;
 	private String MSRSTE_NM;
-	private float NO2;
-	private float O3;
-	private float CO;
-	private float SO2;
-	private int PM10;
-	private int PM25;
+	private Float NO2;
+	private Float O3;
+	private Float CO;
+	private Float SO2;
+	private Integer PM10;
+	private Integer PM25;
 
 	public String getMSRDT() {
 		return MSRDT;
@@ -29,51 +29,51 @@ public class AirVO {
 		MSRSTE_NM = mSRSTE_NM;
 	}
 
-	public float getNO2() {
+	public Float getNO2() {
 		return NO2;
 	}
 
-	public void setNO2(float nO2) {
+	public void setNO2(Float nO2) {
 		NO2 = nO2;
 	}
 
-	public float getO3() {
+	public Float getO3() {
 		return O3;
 	}
 
-	public void setO3(float o3) {
+	public void setO3(Float o3) {
 		O3 = o3;
 	}
 
-	public float getCO() {
+	public Float getCO() {
 		return CO;
 	}
 
-	public void setCO(float cO) {
+	public void setCO(Float cO) {
 		CO = cO;
 	}
 
-	public float getSO2() {
+	public Float getSO2() {
 		return SO2;
 	}
 
-	public void setSO2(float sO2) {
+	public void setSO2(Float sO2) {
 		SO2 = sO2;
 	}
 
-	public int getPM10() {
+	public Integer getPM10() {
 		return PM10;
 	}
 
-	public void setPM10(int pM10) {
+	public void setPM10(Integer pM10) {
 		PM10 = pM10;
 	}
 
-	public int getPM25() {
+	public Integer getPM25() {
 		return PM25;
 	}
 
-	public void setPM25(int pM25) {
+	public void setPM25(Integer pM25) {
 		PM25 = pM25;
 	}
 

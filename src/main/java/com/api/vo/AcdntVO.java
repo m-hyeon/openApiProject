@@ -5,11 +5,11 @@ public class AcdntVO {
 	private String eventType;
 	private String eventDetailType;
 	private String startDate;
-	private float coordX;
-	private float coordY;
+	private Float coordX;
+	private Float coordY;
 	private String linkId;
 	private String roadName;
-	private int roadNo;
+	private Integer roadNo;
 	private String roadDrcType;
 	private String lanesBlockType;
 	private String lanesBlocked;
@@ -48,19 +48,19 @@ public class AcdntVO {
 		this.startDate = startDate;
 	}
 
-	public float getCoordX() {
+	public Float getCoordX() {
 		return coordX;
 	}
 
-	public void setCoordX(float coordX) {
+	public void setCoordX(Float coordX) {
 		this.coordX = coordX;
 	}
 
-	public float getCoordY() {
+	public Float getCoordY() {
 		return coordY;
 	}
 
-	public void setCoordY(float coordY) {
+	public void setCoordY(Float coordY) {
 		this.coordY = coordY;
 	}
 
@@ -80,11 +80,11 @@ public class AcdntVO {
 		this.roadName = roadName;
 	}
 
-	public int getRoadNo() {
+	public Integer getRoadNo() {
 		return roadNo;
 	}
 
-	public void setRoadNo(int roadNo) {
+	public void setRoadNo(Integer roadNo) {
 		this.roadNo = roadNo;
 	}
 

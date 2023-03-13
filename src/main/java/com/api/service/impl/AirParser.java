@@ -1,25 +1,29 @@
 package com.api.service.impl;
 
+import java.io.StringReader;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import com.api.service.ApiService;
 import com.api.service.ParserIntf;
 import com.api.vo.AirVO;
 
+@Component
 public class AirParser implements ParserIntf {
 
 	@Autowired
 	ApiService apiService;
 
 	static public String XmlTag1 = "row";
-	private AirVO airVO = new AirVO();
 
 	@Override
 	public String[] element() {
@@ -32,6 +36,8 @@ public class AirParser implements ParserIntf {
 
 	@Override
 	public void serviceExcute(String[] value) {
+		AirVO airVO = new AirVO();
+
 		airVO.setMSRDT(value[0]);
 		airVO.setMSRSTE_NM(value[1]);
 		airVO.setNO2(Float.parseFloat(value[2]));
@@ -49,7 +55,8 @@ public class AirParser implements ParserIntf {
 		// xml parsing start------------------
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document document = db.parse(data);
+		Document document = db.parse(new InputSource(new StringReader(data)));
+
 		document.getDocumentElement().normalize();
 		System.out.println("Root Element :" + document.getDocumentElement().getNodeName());
 

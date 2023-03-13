@@ -16,8 +16,7 @@ public class AcdntParser implements ParserIntf {
 	@Autowired
 	ApiService apiService;
 
-	static public String jsonTag1 = "items";
-	private AcdntVO acdntVO = new AcdntVO();
+	static public String jsonTag1 = "items"; 
 
 	@Override
 	public String[] element() {
@@ -31,6 +30,8 @@ public class AcdntParser implements ParserIntf {
 
 	@Override
 	public void serviceExcute(String[] value) {		
+		AcdntVO acdntVO = new AcdntVO();
+		
 		acdntVO.setType(value[0]);
 		acdntVO.setEventType(value[1]);
 		acdntVO.setEventDetailType(value[2]);
