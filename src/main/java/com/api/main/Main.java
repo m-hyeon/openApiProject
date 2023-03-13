@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.api.parser.impl.AcdntParser;
@@ -33,6 +34,7 @@ public class Main implements ApplicationRunner {
 	
 	@Value("${com.api.air.type}")
 	private String airType;
+   
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -41,7 +43,7 @@ public class Main implements ApplicationRunner {
 		
 	}
 	
-	
+	@Scheduled(cron = "${com.api.cron}")
 	private void scheduledRun() throws Exception {
 		ApiUtil apiUtil = new ApiUtil();
 		
