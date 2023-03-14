@@ -3,6 +3,8 @@ package com.api.main;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -20,56 +22,63 @@ import com.api.parser.util.ApiUtil;
 public class Main implements ApplicationRunner {
 
 	@Autowired
-	AcdntParser acdntParser; 
-	
+	AcdntParser acdntParser;
+
 	@Autowired
 	AirParser airParser;
 
-	
 	@Value("${com.api.acdnt.url}")
 	private String acdntUrl;
-	
+
 	@Value("${com.api.acdnt.type}")
 	private String acdntType;
 
 	@Value("${com.api.air.url}")
 	private String airUrl;
-	
+
 	@Value("${com.api.air.type}")
 	private String airType;
-   
-	
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		
-		scheduledRun();
-		
+	public void run(ApplicationArguments args) {
+		acdntRun();
+		airRun();
 	}
-	
-	
-	//@Scheduled 규칙
-	//Method는 void 타입으로
-	//Method는 매개변수 사용 불가
-	@Scheduled(cron = "${com.api.cron}")
-	private void scheduledRun() throws Exception {
+
+	// @Scheduled 규칙
+	// Method는 void 타입으로
+	// Method는 매개변수 사용 불가
+	@Scheduled(cron = "${api.acdnt.cron}")
+	private void acdntRun() {
 		ApiUtil apiUtil = new ApiUtil();
-		
+
 		String url = acdntUrl;
 		String data = apiUtil.apiGet(url, acdntType);
 
-		System.out.println("data : " + data);
+		logger.info("acdnt data : {}", data);
+
+		acdntParser.parser(data);
+	}
+
+	// @Scheduled 규칙
+	// Method는 void 타입으로
+	// Method는 매개변수 사용 불가
+	@Scheduled(cron = "${api.air.cron}")
+	private void airRun() {
+		ApiUtil apiUtil = new ApiUtil();
 
 		// 현재 날짜로 date format ex) 20230314
 		Date nowDate = new Date();
 		SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
 		String nowDateFormat = formatDate.format(nowDate);
-				
-		String url2 = airUrl + nowDateFormat;
-		String data2 = apiUtil.apiGet(url2, airType);
 
-		System.out.println("data2 : " + data2);
+		String url = airUrl + nowDateFormat;
+		String data = apiUtil.apiGet(url, airType);
 
-		acdntParser.parser(data);
-		airParser.parser(data2);
+		logger.info("air data : {}", data);
+
+		airParser.parser(data);
 	}
 }

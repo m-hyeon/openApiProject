@@ -1,10 +1,17 @@
 package com.api.parser.impl;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
@@ -23,12 +30,11 @@ public class AirParser implements ParserIntf {
 	@Autowired
 	ApiService apiService;
 
-	static public String XmlTag1 = "row";
+	private String XmlTag1 = "row";
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public String[] element() {
-		System.out.println("api tag: row");
-
 		String[] title = new String[] { "MSRDT", "MSRSTE_NM", "NO2", "O3", "CO", "SO2", "PM10", "PM25" };
 
 		return title;
@@ -51,45 +57,62 @@ public class AirParser implements ParserIntf {
 	}
 
 	@Override
-	public void parser(String data) throws Exception {
-		// xml parsing start------------------
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document document = db.parse(new InputSource(new StringReader(data)));
+	public void parser(String data) {
 
-		document.getDocumentElement().normalize();
-		System.out.println("Root Element :" + document.getDocumentElement().getNodeName());
+		try {
+			// xml parsing start------------------
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document document = db.parse(new InputSource(new StringReader(data)));
 
-		String[] arrElementName = element();
+			document.getDocumentElement().normalize();
 
-		NodeList nList = document.getElementsByTagName(XmlTag1);
-		System.out.println("----------------------------");
+			String[] arrElementName = element();
 
-		// xml data(tag)세트 갯수 불러오기
-		int nListLen = nList.getLength();
-		System.out.println("::::: data세트 갯수: " + nListLen);
+			NodeList nList = document.getElementsByTagName(XmlTag1);
 
-		// xml elements title 불러오기
-		System.out.println("::::: elements 갯수: " + arrElementName.length + "\n");
-		String[] value = new String[arrElementName.length];
+			// xml data(tag)세트 갯수 불러오기
+			int nListLen = nList.getLength();
+			logger.info("air data 세트 갯수: {}", nListLen);
 
-		// xml tag별로 로딩
-		for (int temp = 0; temp < nListLen; temp++) {
+			// xml elements title 불러오기
+			logger.info("air elements 갯수: {}", arrElementName.length + "\n");
+			String[] value = new String[arrElementName.length];
 
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
+			// xml tag별로 로딩
+			for (int temp = 0; temp < nListLen; temp++) {
 
-				// xml elements title 별로 파싱
-				for (int eleNo = 0; eleNo < arrElementName.length; eleNo++) {
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
 
-					value[eleNo] = eElement.getElementsByTagName(arrElementName[eleNo]).item(0).getTextContent();
+					// xml elements title 별로 파싱
+					for (int eleNo = 0; eleNo < arrElementName.length; eleNo++) {
+
+						value[eleNo] = eElement.getElementsByTagName(arrElementName[eleNo]).item(0).getTextContent();
+
+					}
+
+					// setter함수에 저장 후 서비스 실행
+					serviceExcute(value);
 
 				}
+			}
+		} catch (Exception e) {
+			// 현재 날짜로 date format ex) 20230314
+			Date nowDate = new Date();
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMddHH");
+			String nowDateFormat = formatDate.format(nowDate);
 
-				// setter함수에 저장 후 서비스 실행
-				serviceExcute(value);
+			logger.error("air parsing error!! ./airError_{}.log로 저장", nowDateFormat);
 
+			BufferedWriter bw;
+			try {
+				bw = new BufferedWriter(new FileWriter("./airError_" + nowDateFormat + ".log", true));
+				bw.write(data.toString());
+				bw.close();
+			} catch (IOException e1) {
+				logger.error("airError 저장 실패!!");
 			}
 		}
 	}

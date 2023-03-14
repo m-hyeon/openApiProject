@@ -10,11 +10,11 @@ import com.api.vo.AcdntVO;
 import com.api.vo.AirVO;
 
 @Service
-public class ApiServiceImpl implements ApiService{
+public class ApiServiceImpl implements ApiService {
 
 	@Autowired
 	AirMapper airMapper;
-	
+
 	@Autowired
 	AcdntMapper acdntMapper;
 
@@ -23,12 +23,10 @@ public class ApiServiceImpl implements ApiService{
 
 		acdntMapper.insertData(acdnt);
 	}
-	
+
 	// 서울 오염도 정보 insert
 	public void insertAir(AirVO air) {
 
 		airMapper.insertData(air);
-
 	};
-	
 }
