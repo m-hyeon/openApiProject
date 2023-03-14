@@ -1,5 +1,8 @@
 package com.api.main;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -56,12 +59,16 @@ public class Main implements ApplicationRunner {
 
 		System.out.println("data : " + data);
 
-		String url2 = airUrl;
+		// 현재 날짜로 date format ex) 20230314
+		Date nowDate = new Date();
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+		String nowDateFormat = formatDate.format(nowDate);
+				
+		String url2 = airUrl + nowDateFormat;
 		String data2 = apiUtil.apiGet(url2, airType);
 
 		System.out.println("data2 : " + data2);
 
-		
 		acdntParser.parser(data);
 		airParser.parser(data2);
 	}
