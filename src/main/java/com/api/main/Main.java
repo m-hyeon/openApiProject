@@ -43,6 +43,10 @@ public class Main implements ApplicationRunner {
 		
 	}
 	
+	
+	//@Scheduled 규칙
+	//Method는 void 타입으로
+	//Method는 매개변수 사용 불가
 	@Scheduled(cron = "${com.api.cron}")
 	private void scheduledRun() throws Exception {
 		ApiUtil apiUtil = new ApiUtil();
