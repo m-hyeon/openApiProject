@@ -47,7 +47,7 @@ public class AcdntParser implements ParserIntf {
 			acdntVO.setCoordX(Float.parseFloat(value[4]));
 		}
 		if ((!"".equals(value[5]))) {
-			acdntVO.setCoordX(Float.parseFloat(value[5]));
+			acdntVO.setCoordY(Float.parseFloat(value[5]));
 		}
 		acdntVO.setLinkId(value[6]);
 		acdntVO.setRoadName(value[7]);
@@ -107,18 +107,20 @@ public class AcdntParser implements ParserIntf {
 		} catch (Exception e) {
 			// 현재 날짜로 date format ex) 20230314
 			Date nowDate = new Date();
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMddHH");
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 			String nowDateFormat = formatDate.format(nowDate);
 
-			logger.error("acdnt parsing error!! ./acdntError_{}.log로 저장", nowDateFormat);
+			logger.error("acdnt parsing error!! ./log/acdntError_{}.log로 저장", nowDateFormat);
+			logger.error("error msg: {}", e.toString());
 
 			BufferedWriter bw;
 			try {
-				bw = new BufferedWriter(new FileWriter("./acdntError_" + nowDateFormat + ".log", true));
+				bw = new BufferedWriter(new FileWriter("./log/acdntError_" + nowDateFormat + ".log", true));
 				bw.write(data.toString());
 				bw.close();
 			} catch (IOException e1) {
 				logger.error("acdntError 저장 실패!!");
+				logger.error("error msg: {}", e.toString());
 			}
 		}
 	}

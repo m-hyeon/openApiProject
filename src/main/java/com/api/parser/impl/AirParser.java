@@ -101,18 +101,20 @@ public class AirParser implements ParserIntf {
 		} catch (Exception e) {
 			// 현재 날짜로 date format ex) 20230314
 			Date nowDate = new Date();
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMddHH");
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 			String nowDateFormat = formatDate.format(nowDate);
 
-			logger.error("air parsing error!! ./airError_{}.log로 저장", nowDateFormat);
+			logger.error("air parsing error!! ./log/airError_{}.log로 저장", nowDateFormat);
+			logger.error("error msg: {}", e.toString());
 
 			BufferedWriter bw;
 			try {
-				bw = new BufferedWriter(new FileWriter("./airError_" + nowDateFormat + ".log", true));
+				bw = new BufferedWriter(new FileWriter("./log/airError_" + nowDateFormat + ".log", true));
 				bw.write(data.toString());
 				bw.close();
 			} catch (IOException e1) {
 				logger.error("airError 저장 실패!!");
+				logger.error("error msg: {}", e.toString());
 			}
 		}
 	}

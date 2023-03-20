@@ -43,8 +43,11 @@ public class Main implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) {
+		logger.info("\n \n \n \n");
 		acdntRun();
+		logger.info("\n \n \n \n");
 		airRun();
+		logger.info("\n \n \n \n");
 	}
 
 	// @Scheduled 규칙
@@ -56,8 +59,6 @@ public class Main implements ApplicationRunner {
 
 		String url = acdntUrl;
 		String data = apiUtil.apiGet(url, acdntType);
-
-		logger.info("acdnt data : {}", data);
 
 		acdntParser.parser(data);
 	}
@@ -76,8 +77,6 @@ public class Main implements ApplicationRunner {
 
 		String url = airUrl + nowDateFormat;
 		String data = apiUtil.apiGet(url, airType);
-
-		logger.info("air data : {}", data);
 
 		airParser.parser(data);
 	}
