@@ -13,12 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.api.parser.ParserIntf;
 import com.api.service.ApiService;
 import com.api.vo.AcdntVO;
 
 @Component
+@Transactional
 public class AcdntParser implements ParserIntf {
 
 	@Autowired

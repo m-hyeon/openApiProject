@@ -28,6 +28,6 @@ public class ApiServiceImpl implements ApiService {
 	public void insertAir(AirVO air) {
 
 		airMapper.insertData(air);
-		
+
 	};
 }
