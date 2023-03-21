@@ -29,7 +29,7 @@ public class RestApiController {
 	
 	@GetMapping(path ="/air", produces = MediaType.APPLICATION_XML_VALUE)
 	public List<AirVO> airData(){
-
+		//https://velog.io/@garam0410/Java-OPEN-API-%ED%8C%8C%EC%8B%B1%ED%95%98%EA%B8%B0-XML
 		
 		return ;
 		
