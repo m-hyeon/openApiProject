@@ -3,6 +3,14 @@
 
 <mapper namespace="com.api.service.dao.AcdntMapper">
 
+
+	<select id="selectData"
+		resultType="com.api.vo.AcdntVO">
+	<![CDATA[
+		select * from incinfo.acdnt_info
+	]]>
+	</select>
+
 	<insert id="insertData">
 		<![CDATA[
 		replace into incinfo.acdnt_info

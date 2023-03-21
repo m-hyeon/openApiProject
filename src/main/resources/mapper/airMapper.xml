@@ -3,6 +3,15 @@
 
 <mapper namespace="com.api.service.dao.AirMapper">
 
+
+	<select id="selectData"
+		resultType="com.api.vo.AirVO">
+	<![CDATA[
+		select * from incinfo.avg_air_pol
+	]]>
+	</select>
+
+
 	<insert id="insertData">
 		<![CDATA[
 		replace into incinfo.avg_air_pol (MSRDT, MSRSTE_NM, NO2, O3, CO, SO2, PM10, PM25) 

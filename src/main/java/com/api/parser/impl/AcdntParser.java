@@ -107,7 +107,7 @@ public class AcdntParser implements ParserIntf {
 		} catch (Exception e) {
 			// 현재 날짜로 date format ex) 20230314
 			Date nowDate = new Date();
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMddHHmmss");
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMddHHmm");
 			String nowDateFormat = formatDate.format(nowDate);
 
 			logger.error("acdnt parsing error!! ./acdntError_{}.log로 저장", nowDateFormat);
