@@ -7,4 +7,5 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public class XmlConvert {
 
 	@JacksonXmlProperty(isAttribute = true) private String MSRDT; 
+	@JacksonXmlProperty private String MSRSTE_NM; 
 }
