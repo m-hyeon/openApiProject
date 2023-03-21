@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.service.ApiService;
 import com.api.vo.AcdntVO;
 import com.api.vo.AirVO;
-import com.api.vo.XmlConvert;
 
 @RestController
 public class RestApiController {
@@ -28,14 +27,9 @@ public class RestApiController {
 		
 	}
 	
-	@GetMapping("/air")
+	@GetMapping(path ="/air", produces = MediaType.APPLICATION_XML_VALUE)
 	public List<AirVO> airData(){
-		List<AirVO> air = apiService.selectAir();
-		List<XmlConvert> list = new ArrayList<>();
-		list.add(air.get(0));
-		
-		XmlConvert conv = new XmlConvert();
-		conv.set
+
 		
 		return ;
 		
