@@ -7,7 +7,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
+/**
+ * DB에 저장된 데이터를 Xml Api로 제공하기 위한 세팅. (jdom 라이브러리.)
+ * 참고 사이트 [https://codevang.tistory.com/262]
+ * 
+ * @XmlAccessorType(XmlAccessType.NONE) -  Jaxb 어노테이션을 설정한 필드만 직렬화
+ * @XmlRootElement(name ="") - root 계층 설정 *명시하지 않으면 클래스명이 디폴트로 적용
+ * @XmlAttribute : 루트 태그의 값 
+ * @XmlElement : 하위 태그의 값
+ * 
+ */
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "body")
 public class AirVO {
 	

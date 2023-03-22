@@ -1,15 +1,7 @@
 package com.api.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +19,12 @@ public class RestApiController {
 
 	@Autowired
 	ApiService apiService;
-
+	
+	
+	
+	/**
+	 * json으로 its사고정보를 뿌려주는 method
+	 */	
 	@GetMapping("/acdnt")
 	public List<AcdntVO> acdntData() {
 
@@ -36,7 +33,11 @@ public class RestApiController {
 	}
 
 	
-	// XML 데이터 만들어 주기
+	
+	
+	/**
+	 * //xml로 서울시 시간 평균 대기오염도 정보 뿌려주는 method
+	 */	
 	@RequestMapping(value = "/air", method = RequestMethod.GET)
 	@ResponseBody
 	public AirVO sendxml() {

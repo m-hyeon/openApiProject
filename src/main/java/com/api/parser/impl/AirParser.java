@@ -35,6 +35,11 @@ public class AirParser implements ParserIntf {
 	private String XmlTag1 = "row";
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	
+	
+	/**
+	 * oepnApi를 통해 받아온 data의 태그 값을 String 배열로 저장
+	 */
 	@Override
 	public String[] element() {
 		String[] title = new String[] { "MSRDT", "MSRSTE_NM", "NO2", "O3", "CO", "SO2", "PM10", "PM25" };
@@ -42,6 +47,13 @@ public class AirParser implements ParserIntf {
 		return title;
 	}
 
+	
+	
+	
+	/**
+	 * oepnApi를 통해 받아온 data의 파싱된 값을 vo에 Set 하고, insertAir 메서드 실행하여 db에 파싱된 값을 저장
+	 * 
+	 */
 	@Override
 	public void serviceExcute(String[] value) {
 		AirVO airVO = new AirVO();
@@ -75,6 +87,13 @@ public class AirParser implements ParserIntf {
 		apiService.insertAir(airVO);
 	}
 
+	
+	
+	
+	/**
+	 * openApi를 통해 받아온 Xml data를 각각 해당하는 type에 맞게 파싱 후 serviceExcute 실행
+	 * 
+	 */
 	@Override
 	public void parser(String data) {
 
@@ -128,6 +147,8 @@ public class AirParser implements ParserIntf {
 
 			BufferedWriter bw;
 			try {
+				
+				//파싱 실패시  .log 파일로 log 폴더에 저장
 				bw = new BufferedWriter(new FileWriter("./log/airError_" + nowDateFormat + ".log", true));
 				bw.write(data.toString());
 				bw.close();

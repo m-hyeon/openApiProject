@@ -50,9 +50,14 @@ public class Main implements ApplicationRunner {
 		logger.info("\n \n \n \n");
 	}
 
-	// @Scheduled 규칙
-	// Method는 void 타입으로
-	// Method는 매개변수 사용 불가
+	/**
+	 * @Scheduled 규칙 =>  Method는 void 타입으로 // Method는 매개변수 사용 불가
+	 * 
+	 *  apiUtil클래스의 apiGet메서드에 국토교통부_사고정보 API url을 전달하고 Json data를 받아와  AcdntParser에 전달. 
+	 *  AcdntParser의 parser 메서드는 Json data를 전달받아 DB에 저장한다. 
+	 *  
+	 *  
+	 */	
 	@Scheduled(cron = "${api.acdnt.cron}")
 	private void acdntRun() {
 		ApiUtil apiUtil = new ApiUtil();
@@ -63,9 +68,16 @@ public class Main implements ApplicationRunner {
 		acdntParser.parser(data);
 	}
 
-	// @Scheduled 규칙
-	// Method는 void 타입으로
-	// Method는 매개변수 사용 불가
+	
+	
+	/**
+	 * @Scheduled 규칙 =>  Method는 void 타입으로 // Method는 매개변수 사용 불가
+	 * 
+	 *  apiUtil클래스의 apiGet메서드에 서울시 시간 평균 대기오염도 정보 API url을 전달하고 Xml data를 받아와  AirParser에 전달. 
+	 *  AirParser의 parser 메서드는 Xml data를 전달받아 DB에 저장한다. 
+	 *  
+	 *  
+	 */	
 	@Scheduled(cron = "${api.air.cron}")
 	private void airRun() {
 		ApiUtil apiUtil = new ApiUtil();

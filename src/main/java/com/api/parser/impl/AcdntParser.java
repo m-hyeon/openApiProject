@@ -25,10 +25,17 @@ public class AcdntParser implements ParserIntf {
 
 	@Autowired
 	ApiService apiService;
-
+	
 	private String jsonTag1 = "items";
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	
+	
+	
+	
+	/**
+	 * oepnApi를 통해 받아온 data의 태그 값을 String 배열로 저장
+	 */
 	@Override
 	public String[] element() {
 		String[] title = new String[] { "type", "eventType", "eventDetailType", "startDate", "coordX", "coordY",
@@ -37,6 +44,13 @@ public class AcdntParser implements ParserIntf {
 		return title;
 	}
 
+	
+	
+	
+	/**
+	 * oepnApi를 통해 받아온 data의 파싱된 값을 vo에 Set 하고, insertAcdnt 메서드 실행하여 db에 파싱된 값을 저장
+	 * 
+	 */
 	@Override
 	public void serviceExcute(String[] value) {
 		AcdntVO acdntVO = new AcdntVO();
@@ -65,6 +79,12 @@ public class AcdntParser implements ParserIntf {
 		apiService.insertAcdnt(acdntVO);
 	}
 
+	
+	
+	/**
+	 * openApi를 통해 받아온 Json data를 각각 해당하는 type에 맞게 파싱 후 serviceExcute 실행
+	 * 
+	 */
 	@Override
 	public void parser(String data) {
 		try {
@@ -74,7 +94,7 @@ public class AcdntParser implements ParserIntf {
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(data);
 
-			// 배열을 가져옵니다.
+			// Json의 배열을 가져옴.
 			// obj를 우선 JSONObject에 담음
 			JSONObject jsonMain = (JSONObject) obj;
 			JSONObject jsonBody = (JSONObject) jsonMain.get("body");
@@ -117,6 +137,9 @@ public class AcdntParser implements ParserIntf {
 
 			BufferedWriter bw;
 			try {
+				
+				
+				//파싱 실패시  .log 파일로 log 폴더에 저장
 				bw = new BufferedWriter(new FileWriter("./log/acdntError_" + nowDateFormat + ".log", true));
 				bw.write(data.toString());
 				bw.close();
