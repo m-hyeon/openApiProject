@@ -1,5 +1,7 @@
 package com.api.service;
 
+import java.util.List;
+
 import com.api.vo.AcdntVO;
 import com.api.vo.AirVO;
 
@@ -7,6 +9,10 @@ import com.api.vo.AirVO;
  * 각 데이터들을 dao로 전달하기 위한 인터페이스
  */
 public interface ApiService {
+	
+	public List<AcdntVO> selectAcdnt();
+	
+	public List<AirVO> selectAir();
 
 	/**
 	 * vo에 담긴 사고 정보 데이터들을 insert한다.

@@ -1,5 +1,7 @@
 package com.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,20 @@ public class ApiServiceImpl implements ApiService {
 
 		airMapper.insertData(air);
 
-	};
+	}
+
+	@Override
+	public List<AcdntVO> selectAcdnt() {
+
+		return acdntMapper.selectData();
+	}
+	
+	
+	@Override
+	public List<AirVO> selectAir() {
+
+		return airMapper.selectData();
+	}
+	
+	
 }

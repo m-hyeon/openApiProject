@@ -1,16 +1,49 @@
 package com.api.vo;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
 
-@Component
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "body")
 public class AirVO {
+	
+	@XmlElement(name = "items")
+	private List<AirVO> airVO;
+	
+	public List<AirVO> getAirVO() {
+		return airVO;
+	}
+
+	public void setAirVO(List<AirVO> airVO) {
+		this.airVO = airVO;
+	}
+
+	@XmlElement
 	private String MSRDT;
+
+	@XmlElement
 	private String MSRSTE_NM;
+
+	@XmlElement
 	private Float NO2;
+
+	@XmlElement
 	private Float O3;
+
+	@XmlElement
 	private Float CO;
+
+	@XmlElement
 	private Float SO2;
+
+	@XmlElement
 	private Integer PM10;
+
+	@XmlElement
 	private Integer PM25;
 
 	public String getMSRDT() {

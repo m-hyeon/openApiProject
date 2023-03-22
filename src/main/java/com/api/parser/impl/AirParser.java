@@ -48,12 +48,29 @@ public class AirParser implements ParserIntf {
 
 		airVO.setMSRDT(value[0]);
 		airVO.setMSRSTE_NM(value[1]);
-		airVO.setNO2(Float.parseFloat(value[2]));
-		airVO.setO3(Float.parseFloat(value[3]));
-		airVO.setCO(Float.parseFloat(value[4]));
-		airVO.setSO2(Float.parseFloat(value[5]));
-		airVO.setPM10(Integer.parseInt(value[6]));
-		airVO.setPM25(Integer.parseInt(value[7]));
+		
+		if (!"".equals(value[2])) {
+			airVO.setNO2(Float.parseFloat(value[2]));
+		}
+		if (!"".equals(value[3])) {
+			airVO.setO3(Float.parseFloat(value[3]));
+		}
+		if (!"".equals(value[4])) {
+			airVO.setCO(Float.parseFloat(value[4]));
+		}
+		if (!"".equals(value[5])) {
+			airVO.setSO2(Float.parseFloat(value[5]));
+		}
+		if (!"".equals(value[6])) {
+			airVO.setPM10(Integer.parseInt(value[6]));
+		}
+		if (!"".equals(value[7])) {
+			airVO.setPM25(Integer.parseInt(value[7]));
+		}
+		
+		
+		
+		
 
 		apiService.insertAir(airVO);
 	}
@@ -103,11 +120,11 @@ public class AirParser implements ParserIntf {
 		} catch (Exception e) {
 			// 현재 날짜로 date format ex) 20230314
 			Date nowDate = new Date();
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd_HHmm");
 			String nowDateFormat = formatDate.format(nowDate);
 
 			logger.error("air parsing error!! ./log/airError_{}.log로 저장", nowDateFormat);
-			logger.error("error msg: {}", e.toString());
+			logger.error("{}",e);
 
 			BufferedWriter bw;
 			try {
